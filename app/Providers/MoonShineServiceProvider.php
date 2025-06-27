@@ -14,6 +14,11 @@ use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
+use App\MoonShine\Resources\CommentResource;
+use App\MoonShine\Resources\CommunityResource;
+use App\MoonShine\Resources\PostResource;
+use App\MoonShine\Resources\ThemeResource;
+use App\MoonShine\Resources\UserResource;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -53,6 +58,31 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
                 ->badge(fn() => 'Check')
                 ->blank(),
+
+            MenuItem::make(
+                'Comments',
+                new CommentResource(),
+            ),
+
+            MenuItem::make(
+                'Community',
+                new CommunityResource(),
+            ),
+
+            MenuItem::make(
+                'Posts',
+                new PostResource(),
+            ),
+
+            MenuItem::make(
+                'Themes',
+                new ThemeResource(),
+            ),
+
+            MenuItem::make(
+                'Users',
+                new UserResource(),
+            ),
         ];
     }
 
