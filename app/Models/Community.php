@@ -33,4 +33,9 @@ class Community extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function theme(): BelongsTo
+    {
+        return $this->belongsTo(Theme::class);
+    }
 }
