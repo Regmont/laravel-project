@@ -12,6 +12,7 @@ use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
+use MoonShine\Fields\Text;
 
 /**
  * @extends ModelResource<Theme>
@@ -22,6 +23,8 @@ class ThemeResource extends ModelResource
 
     protected string $title = 'Themes';
 
+    protected bool $createInModal = true;
+
     /**
      * @return list<MoonShineComponent|Field>
      */
@@ -30,6 +33,7 @@ class ThemeResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
+                Text::make('Title'),
             ]),
         ];
     }

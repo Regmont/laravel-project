@@ -24,9 +24,20 @@ class Community extends Model
         'posts',
     ];
 
+    /** 
+     * Автор сообщества
+    */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Подписчики
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 
     public function posts(): HasMany

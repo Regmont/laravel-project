@@ -12,6 +12,11 @@ use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
+use MoonShine\Fields\Text;
+use MoonShine\Fields\Email;
+use MoonShine\Fields\Password;
+use MoonShine\Fields\Relationships\HasMany;
+
 
 /**
  * @extends ModelResource<User>
@@ -22,16 +27,45 @@ class UserResource extends ModelResource
 
     protected string $title = 'Users';
 
-    /**
-     * @return list<MoonShineComponent|Field>
-     */
-    public function fields(): array
+    public function indexFields(): array
+    {
+        return [
+            ID::make()->sortable(),
+            Text::make('Name')->sortable(),
+            Email::make('E-mail', 'email')->sortable(),
+        ];
+    }
+ 
+    public function formFields(): array
+    {
+        return [
+            ID::make(),
+            Text::make('Name'),
+            Email::make('E-mail', 'email'),
+            Password::make('Password'),
+        ];
+    }
+ 
+    public function detailFields(): array
     {
         return [
             Block::make([
-                ID::make()->sortable(),
+                Text::make('Name'),
+                Email::make('E-mail', 'email'),
+                Password::make('Password'),
+            ]),
+            Block::make([
+                HasMany::make('Communities', 'communities', resource: new CommunityResource())
+            ]),
+            Block::make([
+                HasMany::make('Comments', 'comments', resource: new CommentResource())
             ]),
         ];
+    }
+
+    public function search(): array
+    {
+        return ['name', 'email'];
     }
 
     /**

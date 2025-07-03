@@ -42,6 +42,11 @@ class CommunityResource extends ModelResource
         ];
     }
 
+    public function getActiveActions(): array
+    {
+        return ['view', 'delete', 'massDelete'];
+    }
+
     /**
      * @param Community $item
      *

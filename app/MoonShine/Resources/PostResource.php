@@ -26,18 +26,6 @@ class PostResource extends ModelResource
 
     protected string $title = 'Posts';
 
-    // /**
-    //  * @return list<MoonShineComponent|Field>
-    //  */
-    // public function fields(): array
-    // {
-    //     return [
-    //         Block::make([
-    //             ID::make()->sortable(),
-    //         ]),
-    //     ];
-    // }
-
     public function indexFields(): array
     {
         return [

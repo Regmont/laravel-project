@@ -60,8 +60,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 ->blank(),
 
             MenuItem::make(
-                'Comments',
-                new CommentResource(),
+                'Themes',
+                new ThemeResource(),
             ),
 
             MenuItem::make(
@@ -75,8 +75,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             ),
 
             MenuItem::make(
-                'Themes',
-                new ThemeResource(),
+                'Comments',
+                new CommentResource(),
             ),
 
             MenuItem::make(
