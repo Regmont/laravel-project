@@ -7,14 +7,14 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Community;
 
+use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Fields\Switcher;
+use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
-use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Text;
-use MoonShine\Fields\Switcher;
 
 /**
  * @extends ModelResource<Community>
@@ -34,10 +34,10 @@ class CommunityResource extends ModelResource
             Block::make([
                 ID::make()->sortable(),
                 Text::make('Name')->sortable(),
-                BelongsTo::make('Theme', 'theme', resource: new ThemeResource())->sortable(),
-                BelongsTo::make('Author', 'user', resource: new UserResource())->sortable(),
+                BelongsTo::make('Theme', 'theme', 'title', resource: new ThemeResource())->sortable(),
+                BelongsTo::make('Author', 'user', 'name', resource: new UserResource())->sortable(),
                 Text::make('Description'),
-                Switcher::make('Public', 'is_piblic')->default(true),
+                Switcher::make('Public', 'is_public')->default(true),
             ]),
         ];
     }

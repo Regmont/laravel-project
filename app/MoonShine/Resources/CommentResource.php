@@ -7,14 +7,14 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 
+use MoonShine\Fields\Number;
+use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
-use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Number;
-use MoonShine\Fields\Text;
 
 /**
  * @extends ModelResource<Comment>
@@ -23,7 +23,7 @@ class CommentResource extends ModelResource
 {
     protected string $model = Comment::class;
 
-    protected string $title = 'Comments';
+    protected string $title = 'Comment';
 
     /**
      * @return list<MoonShineComponent|Field>
@@ -33,9 +33,9 @@ class CommentResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                BelongsTo::make('Post', 'post', resource: new PostResource()),
+                BelongsTo::make('Post', 'post', 'title', new PostResource()),
                 Number::make('Parent', 'parent_id'),
-                BelongsTo::make('User', 'user', resource: new UserResource()),
+                BelongsTo::make('User', 'user', 'name', new UserResource()),
                 Text::make('Message'),
             ]),
         ];

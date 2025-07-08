@@ -24,14 +24,16 @@ class Post extends Model
         'community',
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+
 
     public function community(): BelongsTo
     {
         return $this->belongsTo(Community::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function comments(): HasMany

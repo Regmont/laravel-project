@@ -26,20 +26,20 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentCreateRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->getAuthIdentifier();
 
         $comment = new Comment($data);
-        
+
         return $comment->save();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(CommentUpdateRequest $comment)
     {
         return $comment;
     }
@@ -58,14 +58,13 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $data = $request->validated();
-
         return $comment->update($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment): ?bool
     {
         return $comment->delete();
     }

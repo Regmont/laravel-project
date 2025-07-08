@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Community\CommunityUpdateRequest;
 use App\Http\Requests\Community\CommunityCreateRequest;
+use App\Http\Requests\Community\CommunityUpdateRequest;
 use App\Models\Community;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,14 +26,14 @@ class CommunityController extends Controller
         $data['user_id'] = Auth::user()->getAuthIdentifier();
 
         $community = new Community($data);
-        
+
         return $community->save();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Community $community)
+    public function show(CommunityUpdateRequest $community)
     {
         return $community;
     }
@@ -49,10 +49,9 @@ class CommunityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CommunityUpdateRequest $request, Community $community)
+    public function update(Request $request, Community $community)
     {
         $data = $request->validated();
-
         return $community->update($data);
     }
 

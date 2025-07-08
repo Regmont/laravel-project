@@ -7,16 +7,13 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-use MoonShine\Resources\ModelResource;
-use MoonShine\Decorations\Block;
-use MoonShine\Fields\ID;
-use MoonShine\Fields\Field;
-use MoonShine\Components\MoonShineComponent;
-use MoonShine\Fields\Text;
 use MoonShine\Fields\Email;
 use MoonShine\Fields\Password;
 use MoonShine\Fields\Relationships\HasMany;
-
+use MoonShine\Fields\Text;
+use MoonShine\Resources\ModelResource;
+use MoonShine\Decorations\Block;
+use MoonShine\Fields\ID;
 
 /**
  * @extends ModelResource<User>
@@ -25,7 +22,7 @@ class UserResource extends ModelResource
 {
     protected string $model = User::class;
 
-    protected string $title = 'Users';
+    protected string $title = 'User';
 
     public function indexFields(): array
     {
@@ -35,7 +32,7 @@ class UserResource extends ModelResource
             Email::make('E-mail', 'email')->sortable(),
         ];
     }
- 
+
     public function formFields(): array
     {
         return [
@@ -45,11 +42,12 @@ class UserResource extends ModelResource
             Password::make('Password'),
         ];
     }
- 
+
     public function detailFields(): array
     {
         return [
             Block::make([
+                ID::make(),
                 Text::make('Name'),
                 Email::make('E-mail', 'email'),
                 Password::make('Password'),

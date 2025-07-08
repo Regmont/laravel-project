@@ -7,15 +7,12 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 
-use MoonShine\Resources\ModelResource;
-use MoonShine\Decorations\Block;
-use MoonShine\Fields\ID;
-use MoonShine\Fields\Field;
-use MoonShine\Components\MoonShineComponent;
-use MoonShine\Fields\Text;
-use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Image;
 use MoonShine\CKEditor\Fields\CKEditor;
+use MoonShine\Fields\Image;
+use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Fields\Text;
+use MoonShine\Resources\ModelResource;
+use MoonShine\Fields\ID;
 
 /**
  * @extends ModelResource<Post>
@@ -24,41 +21,43 @@ class PostResource extends ModelResource
 {
     protected string $model = Post::class;
 
-    protected string $title = 'Posts';
+    protected string $title = 'Post';
 
     public function indexFields(): array
     {
         return [
             ID::make(),
             Text::make('Title'),
-            BelongsTo::make('User', 'user', resource: new UserResource()),
-            BelongsTo::make('Community', 'community', resource: new CommunityResource()),
+            BelongsTo::make('User', 'user', 'name', resource: new UserResource()),
+            BelongsTo::make('Community', 'community', 'name', resource: new CommunityResource()),
         ];
     }
- 
+
     public function formFields(): array
     {
         return [
             ID::make(),
             Text::make('Title'),
             Image::make('Media')
-            ->allowedExtensions(['jpg', 'jpeg', 'png', 'jfif'])
-            ->nullable()
-            ->removable(),
+                ->allowedExtensions(['jpg', 'jpeg', 'png'])
+                ->dir('post_media')
+                ->nullable()
+                ->removable()
+            ,
             CKEditor::make('Content'),
-            BelongsTo::make('User', 'user', resource: new UserResource()),
-            BelongsTo::make('Community', 'community', resource: new CommunityResource()),
+            BelongsTo::make('User', 'user', 'name', resource: new UserResource()),
+            BelongsTo::make('Community', 'community', 'name', resource: new CommunityResource()),
         ];
     }
- 
+
     public function detailFields(): array
     {
         return [
             Text::make('Title'),
             Image::make('Media'),
             CKEditor::make('Content'),
-            BelongsTo::make('User', 'user', resource: new UserResource()),
-            BelongsTo::make('Community', 'community', resource: new CommunityResource()),
+            BelongsTo::make('User', 'user', 'name', resource: new UserResource()),
+            BelongsTo::make('Community', 'community', 'name', resource: new CommunityResource()),
         ];
     }
 

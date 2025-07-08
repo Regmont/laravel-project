@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
+
 class Community extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    protected $fillable =[
         'name',
         'theme_id',
         'is_public',
@@ -19,29 +21,21 @@ class Community extends Model
         'user_id',
     ];
 
-    protected $with = [
-        'user',
-        'posts',
-    ];
-
-    /** 
+    /**
      * Автор сообщества
-    */
-    public function user(): BelongsTo
-    {
+     */
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
     /**
      * Подписчики
      */
-    public function users(): HasMany
-    {
+    public function users(): HasMany {
         return $this->hasMany(User::class);
     }
 
-    public function posts(): HasMany
-    {
+    public function posts(): HasMany{
         return $this->hasMany(Post::class);
     }
 

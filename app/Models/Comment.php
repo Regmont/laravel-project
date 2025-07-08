@@ -6,21 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
 class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    protected $fillable=[
         'user_id',
         'post_id',
         'parent_id',
         'message',
     ];
 
-    protected $with = ['user'];
+    public $with = ['user'];
 
-    public function user(): BelongsTo
-    {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 

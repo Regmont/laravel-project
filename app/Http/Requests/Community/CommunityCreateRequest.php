@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Community;
 
-use App\Models\Community;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Community
 
 class CommunityCreateRequest extends FormRequest
 {
@@ -12,7 +12,7 @@ class CommunityCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,10 +23,10 @@ class CommunityCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', Rule::unique(Community::class)],
-            'theme_id' => ['required', 'integer'],
-            'is_public' => ['boolean'],
-            'description' => ['string', 'max:255'],
+            'name'=>['required','string','max:255', Rule::unique(Community::class)],
+            'theme_id'=>['required','integer'],
+            'is_public'=>['boolean'],
+            'description' =>['string','max:255'],
         ];
     }
 }

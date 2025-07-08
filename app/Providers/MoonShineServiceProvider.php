@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\CommentResource;
+use App\MoonShine\Resources\CommunityResource;
+use App\MoonShine\Resources\ThemeResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
-use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
 use MoonShine\Menu\MenuItem;
 use MoonShine\Resources\MoonShineUserResource;
 use MoonShine\Resources\MoonShineUserRoleResource;
+use App\MoonShine\Resources\PostResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
-use App\MoonShine\Resources\CommentResource;
-use App\MoonShine\Resources\CommunityResource;
-use App\MoonShine\Resources\PostResource;
-use App\MoonShine\Resources\ThemeResource;
-use App\MoonShine\Resources\UserResource;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -55,34 +54,34 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 ),
             ]),
 
+            MenuItem::make(
+                'Темы',
+                new ThemeResource()
+            ),
+
+            MenuItem::make(
+                'Сообщества',
+                new CommunityResource()
+            ),
+
+             MenuItem::make(
+                'Посты',
+                new PostResource()
+             ),
+
+             MenuItem::make(
+                'Комментарии',
+                new CommentResource()
+             ),
+
+             MenuItem::make(
+                'Пользователи',
+                new UserResource()
+             ),
+
             MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
                 ->badge(fn() => 'Check')
                 ->blank(),
-
-            MenuItem::make(
-                'Themes',
-                new ThemeResource(),
-            ),
-
-            MenuItem::make(
-                'Community',
-                new CommunityResource(),
-            ),
-
-            MenuItem::make(
-                'Posts',
-                new PostResource(),
-            ),
-
-            MenuItem::make(
-                'Comments',
-                new CommentResource(),
-            ),
-
-            MenuItem::make(
-                'Users',
-                new UserResource(),
-            ),
         ];
     }
 
