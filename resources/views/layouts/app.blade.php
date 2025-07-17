@@ -79,12 +79,12 @@
                             </a>
                         </li>
                         @guest
-                        <li>
-                            <a href="{{ route('login') }}" class="not-box-open">
-                                <span><img src="{{ asset('assets/images/icon6.png') }}" alt=""></span>
-                                Log in
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ route('login') }}" class="not-box-open">
+                                    <span><img src="{{ asset('assets/images/icon6.png') }}" alt=""></span>
+                                    Log in
+                                </a>
+                            </li>
                             @if (Route::has('register'))
                                 <li>
                                     <a href="{{ route('register') }}" class="not-box-open">
@@ -114,7 +114,17 @@
                                 <li><a href="#" title="">Faqs</a></li>
                                 <li><a href="#" title="">Terms & Conditions</a></li>
                             </ul>
-                            <h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+                            <h3 class="tc">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-dropdown-link :href="route('logout')"
+                                                     onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </h3>
                         </div><!--user-account-settingss end-->
                     @endauth
                 </div>
@@ -128,162 +138,13 @@
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
-        </header> 
+        </header>
     @endif
-
     <main>
         {{ $slot }}
 
         @yield('content')
     </main>
-
-    <div class="chatbox-list">
-        <div class="chatbox">
-            <div class="chat-mg">
-                <a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a>
-                <span>2</span>
-            </div>
-            <div class="conversation-box">
-                <div class="con-title mg-3">
-                    <div class="chat-user-info">
-                        <img src="http://via.placeholder.com/34x33" alt="">
-                        <h3>John Doe <span class="status-info"></span></h3>
-                    </div>
-                    <div class="st-icons">
-                        <a href="#" title=""><i class="la la-cog"></i></a>
-                        <a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>
-                        <a href="#" title="" class="close-chat"><i class="la la-close"></i></a>
-                    </div>
-                </div>
-                <div class="chat-hist mCustomScrollbar" data-mcs-theme="dark">
-                    <div class="chat-msg">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
-                        <span>Sat, Aug 23, 1:10 PM</span>
-                    </div>
-                    <div class="date-nd">
-                        <span>Sunday, August 24</span>
-                    </div>
-                    <div class="chat-msg st2">
-                        <p>Cras ultricies ligula.</p>
-                        <span>5 minutes ago</span>
-                    </div>
-                    <div class="chat-msg">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
-                        <span>Sat, Aug 23, 1:10 PM</span>
-                    </div>
-                </div><!--chat-list end-->
-                <div class="typing-msg">
-                    <form>
-                        <textarea placeholder="Type a message here"></textarea>
-                        <button type="submit"><i class="fa fa-send"></i></button>
-                    </form>
-                    <ul class="ft-options">
-                        <li><a href="#" title=""><i class="la la-smile-o"></i></a></li>
-                        <li><a href="#" title=""><i class="la la-camera"></i></a></li>
-                        <li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>
-                    </ul>
-                </div><!--typing-msg end-->
-            </div><!--chat-history end-->
-        </div>
-        <div class="chatbox">
-            <div class="chat-mg">
-                <a href="#" title=""><img src="http://via.placeholder.com/70x70" alt=""></a>
-            </div>
-            <div class="conversation-box">
-                <div class="con-title mg-3">
-                    <div class="chat-user-info">
-                        <img src="http://via.placeholder.com/34x33" alt="">
-                        <h3>John Doe <span class="status-info"></span></h3>
-                    </div>
-                    <div class="st-icons">
-                        <a href="#" title=""><i class="la la-cog"></i></a>
-                        <a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>
-                        <a href="#" title="" class="close-chat"><i class="la la-close"></i></a>
-                    </div>
-                </div>
-                <div class="chat-hist mCustomScrollbar" data-mcs-theme="dark">
-                    <div class="chat-msg">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
-                        <span>Sat, Aug 23, 1:10 PM</span>
-                    </div>
-                    <div class="date-nd">
-                        <span>Sunday, August 24</span>
-                    </div>
-                    <div class="chat-msg st2">
-                        <p>Cras ultricies ligula.</p>
-                        <span>5 minutes ago</span>
-                    </div>
-                    <div class="chat-msg">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
-                        <span>Sat, Aug 23, 1:10 PM</span>
-                    </div>
-                </div><!--chat-list end-->
-                <div class="typing-msg">
-                    <form>
-                        <textarea placeholder="Type a message here"></textarea>
-                        <button type="submit"><i class="fa fa-send"></i></button>
-                    </form>
-                    <ul class="ft-options">
-                        <li><a href="#" title=""><i class="la la-smile-o"></i></a></li>
-                        <li><a href="#" title=""><i class="la la-camera"></i></a></li>
-                        <li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>
-                    </ul>
-                </div><!--typing-msg end-->
-            </div><!--chat-history end-->
-        </div>
-        <div class="chatbox">
-            <div class="chat-mg bx">
-                <a href="#" title=""><img src="{{ asset('assets/images/chat.png') }}" alt=""></a>
-                <span>2</span>
-            </div>
-            <div class="conversation-box">
-                <div class="con-title">
-                    <h3>Messages</h3>
-                    <a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>
-                </div>
-                <div class="chat-list">
-                    <div class="conv-list active">
-                        <div class="usrr-pic">
-                            <img src="http://via.placeholder.com/50x50" alt="">
-                            <span class="active-status activee"></span>
-                        </div>
-                        <div class="usy-info">
-                            <h3>John Doe</h3>
-                            <span>Lorem ipsum dolor <img src="{{ asset('assets/images/smley.png') }}" alt=""></span>
-                        </div>
-                        <div class="ct-time">
-                            <span>1:55 PM</span>
-                        </div>
-                        <span class="msg-numbers">2</span>
-                    </div>
-                    <div class="conv-list">
-                        <div class="usrr-pic">
-                            <img src="http://via.placeholder.com/50x50" alt="">
-                        </div>
-                        <div class="usy-info">
-                            <h3>John Doe</h3>
-                            <span>Lorem ipsum dolor <img src="{{ asset('assets/images/smley.png') }}" alt=""></span>
-                        </div>
-                        <div class="ct-time">
-                            <span>11:39 PM</span>
-                        </div>
-                    </div>
-                    <div class="conv-list">
-                        <div class="usrr-pic">
-                            <img src="http://via.placeholder.com/50x50" alt="">
-                        </div>
-                        <div class="usy-info">
-                            <h3>John Doe</h3>
-                            <span>Lorem ipsum dolor <img src="{{ asset('assets/images/smley.png') }}" alt=""></span>
-                        </div>
-                        <div class="ct-time">
-                            <span>0.28 AM</span>
-                        </div>
-                    </div>
-                </div><!--chat-list end-->
-            </div><!--conversation-box end-->
-        </div>
-    </div><!--chatbox-list end-->
 </div><!--theme-layout end-->
 
 <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>

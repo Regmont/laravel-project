@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -49,8 +50,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function communities(): HasMany{
-        return $this->hasMany(Community::class);
+    public function communities(): BelongsToMany{
+        return $this->belongsToMany(Community::class);
     }
 
     public function comments(): HasMany {

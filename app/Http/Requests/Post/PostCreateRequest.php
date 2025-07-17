@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Post;
 
+use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostCreateRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class PostCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +26,12 @@ class PostCreateRequest extends FormRequest
         return [
             'title' => [
                 'required',
-                'string', 
+                'string',
                 'max:255',
-                Rule::unique(Community::class)
+                Rule::unique(Post::class),
             ],
-            'media',
+            'media' => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
             'content' => ['string', 'max:255'],
-            'user_id' => ['required', 'integer'],
             'community_id' => ['required', 'integer'],
         ];
     }

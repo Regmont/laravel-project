@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Community\CommunityCreateRequest;
 use App\Http\Requests\Community\CommunityUpdateRequest;
 use App\Models\Community;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommunityController extends Controller
@@ -33,9 +35,9 @@ class CommunityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CommunityUpdateRequest $community)
+    public function show(Community $community)
     {
-        return $community;
+        return $community->with('posts')->first();
     }
 
     /**
@@ -49,9 +51,10 @@ class CommunityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Community $community)
+    public function update(CommunityUpdateRequest $request, Community $community)
     {
         $data = $request->validated();
+
         return $community->update($data);
     }
 
@@ -61,5 +64,19 @@ class CommunityController extends Controller
     public function destroy(Community $community): ?bool
     {
         return $community->delete();
+    }
+
+    public function subscribe(Community $community, User $user)
+    {
+        $user->communities()->attach($community->id);
+
+        return redirect()->route('community.show', $community);
+    }
+
+    public function unSubscribe(Community $community, User $user)
+    {
+        $user->communities()->detach($community->id);
+
+        return redirect()->route('home');
     }
 }

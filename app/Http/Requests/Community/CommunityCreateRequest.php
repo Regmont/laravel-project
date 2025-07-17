@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Community;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Community
+use App\Models\Community;
 
 class CommunityCreateRequest extends FormRequest
 {

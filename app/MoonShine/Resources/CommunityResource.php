@@ -34,18 +34,18 @@ class CommunityResource extends ModelResource
             Block::make([
                 ID::make()->sortable(),
                 Text::make('Name')->sortable(),
-                BelongsTo::make('Theme', 'theme', 'title', resource: new ThemeResource())->sortable(),
-                BelongsTo::make('Author', 'user', 'name', resource: new UserResource())->sortable(),
+                BelongsTo::make('Theme', 'theme', 'title', new ThemeResource())->sortable(),
+                BelongsTo::make('Author', 'user', 'name', new UserResource())->sortable(),
                 Text::make('Description'),
                 Switcher::make('Public', 'is_public')->default(true),
             ]),
         ];
     }
 
-    public function getActiveActions(): array
-    {
-        return ['view', 'delete', 'massDelete'];
-    }
+//    public function getActiveActions(): array
+//    {
+//        return ['view', 'delete', 'massDelete'];
+//    }
 
     /**
      * @param Community $item

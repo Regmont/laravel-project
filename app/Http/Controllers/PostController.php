@@ -4,30 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\PostCreateRequest;
 use App\Http\Requests\Post\PostUpdateRequest;
-use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(PostCreateRequest $request)
+    public function store(PostCreateRequest $request, User $user)
     {
         $data = $request->validated();
-        $data['user_id'] = Auth::user()->getAuthIdentifier();
 
-        $post = new Comment($data);
+        $image = $data['media'];
+        $imageName = Str::random(40) . '.' . $image->getClientOriginalExtension();// hbKJBHBhbhbjhb67687BJHvjtvtuy.jpeg
+        $image->move(
+            storage_path() . '/app/public/post_media',
+            $imageName
+        );
+        $data['media'] = $imageName;
+
+        $data['user_id'] = $user->id;
+
+        $post = new Post($data);
 
         return $post->save();
     }

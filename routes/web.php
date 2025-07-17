@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,10 +31,13 @@ Route::middleware('auth')->group(function () {
         'index',
         'show',
     ]);
+    Route::post('/community/subscribe/{community}/{user}', [CommunityController::class, 'subscribe'])->name('community.subscribe');
+    Route::post('/community/unsubscribe/{community}/{user}', [CommunityController::class, 'unSubscribe'])->name('community.unsubscribe');
     Route::resource('/post', PostController::class)->except([
         'index',
         'show'
     ]);
+    Route::post('/post/create/{user}', [PostController::class, 'store'])->name('post.store');
 });
 
 Route::resource('/community', CommunityController::class)->only('show');

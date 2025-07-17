@@ -28,8 +28,8 @@ class PostResource extends ModelResource
         return [
             ID::make(),
             Text::make('Title'),
-            BelongsTo::make('User', 'user', 'name', resource: new UserResource()),
-            BelongsTo::make('Community', 'community', 'name', resource: new CommunityResource()),
+            BelongsTo::make('User', 'user', 'name', new UserResource()),
+            BelongsTo::make('Community', 'community', 'name', new CommunityResource()),
         ];
     }
 
@@ -45,8 +45,8 @@ class PostResource extends ModelResource
                 ->removable()
             ,
             CKEditor::make('Content'),
-            BelongsTo::make('User', 'user', 'name', resource: new UserResource()),
-            BelongsTo::make('Community', 'community', 'name', resource: new CommunityResource()),
+            BelongsTo::make('User', 'user', 'name', new UserResource()),
+            BelongsTo::make('Community', 'community', 'name', new CommunityResource()),
         ];
     }
 
@@ -56,8 +56,8 @@ class PostResource extends ModelResource
             Text::make('Title'),
             Image::make('Media'),
             CKEditor::make('Content'),
-            BelongsTo::make('User', 'user', 'name', resource: new UserResource()),
-            BelongsTo::make('Community', 'community', 'name', resource: new CommunityResource()),
+            BelongsTo::make('User', 'user', 'name', new UserResource()),
+            BelongsTo::make('Community', 'community', 'name', new CommunityResource()),
         ];
     }
 

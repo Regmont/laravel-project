@@ -1,10 +1,4 @@
-<x-app-layout> 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
+<x-app-layout>
     <div class="main-section">
         <div class="container">
             <div class="main-section-data">
@@ -12,33 +6,31 @@
                     <div class="col-lg-3 col-md-4 pd-left-none no-pd">
                         <div class="main-left-sidebar no-margin">
                             {{-- Профиль --}}
-                            <div class="user-data full-width">
-                                <div class="user-profile">
-                                    <div class="username-dt">
-                                        <div class="usr-pic">
-                                            <img src="http://via.placeholder.com/100x100" alt="">
+                            @auth
+                                <div class="user-data full-width">
+                                    <div class="user-profile">
+                                        <div class="username-dt">
+                                            <div class="usr-pic">
+                                                <img src="http://via.placeholder.com/100x100" alt="">
+                                            </div>
+                                        </div><!--username-dt end-->
+                                        <div class="user-specs">
+                                            <h3>{{ auth()->user()->name }}</h3>
                                         </div>
-                                    </div><!--username-dt end-->
-                                    <div class="user-specs">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer at Self Employed</span>
-                                    </div>
-                                </div><!--user-profile end-->
-                                <ul class="user-fw-status">
-                                    <li>
-                                        <h4>Following</h4>
-                                        <span>34</span>
-                                    </li>
-                                    <li>
-                                        <h4>Followers</h4>
-                                        <span>155</span>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="">View Profile</a>
-                                    </li>
-                                </ul>
-                            </div><!--user-data end-->
-                           {{-- Темы --}}
+                                    </div><!--user-profile end-->
+                                    <ul class="user-fw-status">
+                                        <li>
+                                            <h4>Following</h4>
+                                            <span>{{ auth()->user()->communities()->count() }}</span>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('profile.edit') }}" title="">View Profile</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endauth
+                            <!--user-data end-->
+                            {{-- Темы --}}
                             <div class="suggestions full-width">
                                 <div class="sd-title">
                                     <h3>Темы</h3>
@@ -82,94 +74,18 @@
                     <div class="col-lg-6 col-md-8 no-pd">
                         <div class="main-ws-sec">
 
-                            <div class="post-topbar">
-                                <div class="user-picy">
-                                    <img src="http://via.placeholder.com/100x100" alt="">
-                                </div>
-                                <div class="post-st">
-                                    <ul>
-                                        <li><a class="post_project" href="#" title="">Post a Project</a></li>
-                                        <li><a class="post-jb active" href="#" title="">Post a Job</a></li>
-                                    </ul>
-                                </div><!--post-st end-->
-                            </div><!--post-topbar end-->
-
-
-
-                            <div class="top-profiles">
-                                <div class="pf-hd">
-                                    <h3>Top Profiles</h3>
-                                    <i class="la la-ellipsis-v"></i>
-                                </div>
-                                <div class="profiles-slider">
-                                    <div class="user-profy">
-                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer</span>
+                            @auth()
+                                <div class="post-topbar">
+                                    <div class="user-picy">
+                                        <img src="http://via.placeholder.com/100x100" alt="">
+                                    </div>
+                                    <div class="post-st">
                                         <ul>
-                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                            <li><a href="#" title="" class="envlp"><img src="{{ asset('assets/images/envelop.png') }}" alt=""></a></li>
-                                            <li><a href="#" title="" class="hire">hire</a></li>
+                                            <li><a class="post_project" href="#" title="">Create a post</a></li>
                                         </ul>
-                                        <a href="#" title="">View Profile</a>
-                                    </div><!--user-profy end-->
-                                    <div class="user-profy">
-                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer</span>
-                                        <ul>
-                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                            <li><a href="#" title="" class="envlp"><img src="{{ asset('assets/images/envelop.png') }}" alt=""></a></li>
-                                            <li><a href="#" title="" class="hire">hire</a></li>
-                                        </ul>
-                                        <a href="#" title="">View Profile</a>
-                                    </div><!--user-profy end-->
-                                    <div class="user-profy">
-                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer</span>
-                                        <ul>
-                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                            <li><a href="#" title="" class="envlp"><img src="{{ asset('assets/images/envelop.png') }}" alt=""></a></li>
-                                            <li><a href="#" title="" class="hire">hire</a></li>
-                                        </ul>
-                                        <a href="#" title="">View Profile</a>
-                                    </div><!--user-profy end-->
-                                    <div class="user-profy">
-                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer</span>
-                                        <ul>
-                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                            <li><a href="#" title="" class="envlp"><img src="{{ asset('assets/images/envelop.png') }}" alt=""></a></li>
-                                            <li><a href="#" title="" class="hire">hire</a></li>
-                                        </ul>
-                                        <a href="#" title="">View Profile</a>
-                                    </div><!--user-profy end-->
-                                    <div class="user-profy">
-                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer</span>
-                                        <ul>
-                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                            <li><a href="#" title="" class="envlp"><img src="{{ asset('assets/images/envelop.png') }}" alt=""></a></li>
-                                            <li><a href="#" title="" class="hire">hire</a></li>
-                                        </ul>
-                                        <a href="#" title="">View Profile</a>
-                                    </div><!--user-profy end-->
-                                    <div class="user-profy">
-                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                        <h3>John Doe</h3>
-                                        <span>Graphic Designer</span>
-                                        <ul>
-                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                            <li><a href="#" title="" class="envlp"><img src="{{ asset('assets/images/envelop.png') }}" alt=""></a></li>
-                                            <li><a href="#" title="" class="hire">hire</a></li>
-                                        </ul>
-                                        <a href="#" title="">View Profile</a>
-                                    </div><!--user-profy end-->
-                                </div><!--profiles-slider end-->
-                            </div><!--top-profiles end-->
+                                    </div><!--post-st end-->
+                                </div><!--post-topbar end-->
+                            @endauth
 
                             {{-- Посты --}}
                             <div class="posts-section">
@@ -179,7 +95,7 @@
                                             <div class="usy-dt">
                                                 @if(isset($post->media))
                                                     <img
-                                                        src="{{ url('storage/' . $post->media) }}"
+                                                        src="{{ asset('storage/' . $post->media) }}"
                                                         alt="{{ $post->name }}"
                                                     >
                                                 @endif
@@ -260,16 +176,6 @@
                     </div>
                     <div class="col-lg-3 pd-right-none no-pd">
                         <div class="right-sidebar">
-                            <div class="widget widget-about">
-                                <img src="{{ asset('assets/images/wd-logo.png') }}" alt="">
-                                <h3>Track Time on Workwise</h3>
-                                <span>Pay only for the Hours worked</span>
-                                <div class="sign_link">
-                                    <h3><a href="#" title="">Sign up</a></h3>
-                                    <a href="#" title="">Learn More</a>
-                                </div>
-                            </div><!--widget-about end-->
-
                             <div class="widget widget-jobs">
                                 <div class="widget suggestions full-width">
                                     <div class="sd-title">
@@ -288,10 +194,41 @@
                                                 <div class="suggestion-usd">
                                                     <img src="http://via.placeholder.com/35x35" alt="">
                                                     <div class="sgt-text">
-                                                        <h4>{{ $community->name }}</h4>
-                                                        <span>{{ $community->theme->title }}</span>
+                                                        <a href="{{ route('community.show', $community->id) }}">
+                                                            <h4>{{ $community->name }}</h4>
+                                                            <span>{{ $community->theme->title }}</span>
+                                                        </a>
                                                     </div>
-                                                    <span><i class="la la-plus"></i></span>
+                                                    <span>
+                                                        @auth()
+                                                            @if(
+                                                                in_array(
+                                                                    $community->id,
+                                                                    auth()->user()->communities()->pluck('community_id')->toArray()
+                                                                )
+                                                            )
+                                                                <form action="{{ route('community.unsubscribe', [$community, auth()->user()]) }}" method="post">
+                                                                    @csrf
+
+                                                                    <x-dropdown-link :href="route('community.unsubscribe', [$community, auth()->user()])"
+                                                                                     onclick="event.preventDefault();
+                                                                            this.closest('form').submit();">
+                                                                        <i class="la la-minus" title="unfollow"></i>
+                                                                    </x-dropdown-link>
+                                                                </form>
+                                                            @else
+                                                                <form action="{{ route('community.subscribe', [$community, auth()->user()]) }}" method="post">
+                                                                    @csrf
+
+                                                                    <x-dropdown-link :href="route('community.subscribe', [$community, auth()->user()])"
+                                                                                     onclick="event.preventDefault();
+                                                                             this.closest('form').submit();">
+                                                                        <i class="la la-plus" title="follow"></i>
+                                                                    </x-dropdown-link>
+                                                                </form>
+                                                            @endif
+                                                        @endauth
+                                                    </span>
                                                 </div>
                                             @endforeach
                                             <div class="view-more">
@@ -308,106 +245,48 @@
         </div>
     </div>
 
-    <div class="post-popup pst-pj">
-        <div class="post-project">
-            <h3>Post a project</h3>
-            <div class="post-project-fields">
-                <form>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <input type="text" name="title" placeholder="Title">
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="inp-field">
-                                <select>
-                                    <option>Category</option>
-                                    <option>Category 1</option>
-                                    <option>Category 2</option>
-                                    <option>Category 3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <input type="text" name="skills" placeholder="Skills">
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="price-sec">
-                                <div class="price-br">
-                                    <input type="text" name="price1" placeholder="Price">
-                                    <i class="la la-dollar"></i>
-                                </div>
-                                <span>To</span>
-                                <div class="price-br">
-                                    <input type="text" name="price1" placeholder="Price">
-                                    <i class="la la-dollar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <textarea name="description" placeholder="Description"></textarea>
-                        </div>
-                        <div class="col-lg-12">
-                            <ul>
-                                <li><button class="active" type="submit" value="post">Post</button></li>
-                                <li><a href="#" title="">Cancel</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div><!--post-project-fields end-->
-            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
-        </div><!--post-project end-->
-    </div><!--post-project-popup end-->
+    @auth()
+        <div class="post-popup pst-pj">
+            <div class="post-project">
+                <h3>Create a post</h3>
+                <div class="post-project-fields">
+                    <form method="POST" action="{{ route('post.store', [auth()->user()]) }}" enctype="multipart/form-data">
+                        @csrf
 
-    <div class="post-popup job_post">
-        <div class="post-project">
-            <h3>Post a job</h3>
-            <div class="post-project-fields">
-                <form>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <input type="text" name="title" placeholder="Title">
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="inp-field">
-                                <select>
-                                    <option>Category</option>
-                                    <option>Category 1</option>
-                                    <option>Category 2</option>
-                                    <option>Category 3</option>
-                                </select>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="text" name="title" placeholder="Title">
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="inp-field">
+                                    <select name="community_id">
+                                        @foreach(auth()->user()->communities()->get() as $community)
+                                            <option value="{{ $community->id }}">{{ $community->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <input type="file" name="media" id="media">
+                            </div>
+
+                            <div class="col-lg-12">
+                                <textarea name="content" placeholder="Description"></textarea>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <ul>
+                                    <li><button class="active" type="submit" value="post">Post</button></li>
+                                    <li><a href="#" title="">Cancel</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <input type="text" name="skills" placeholder="Skills">
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="price-br">
-                                <input type="text" name="price1" placeholder="Price">
-                                <i class="la la-dollar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="inp-field">
-                                <select>
-                                    <option>Full Time</option>
-                                    <option>Half time</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <textarea name="description" placeholder="Description"></textarea>
-                        </div>
-                        <div class="col-lg-12">
-                            <ul>
-                                <li><button class="active" type="submit" value="post">Post</button></li>
-                                <li><a href="#" title="">Cancel</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div><!--post-project-fields end-->
-            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
-        </div><!--post-project end-->
-    </div><!--post-project-popup end-->
-</x-app-layout> 
+                    </form>
+                </div><!--post-project-fields end-->
+                <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+            </div><!--post-project end-->
+        </div><!--post-project-popup end-->
+    @endauth
+</x-app-layout>
